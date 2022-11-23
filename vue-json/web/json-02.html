@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    function hello01() {
+        /*1.
+         var  str="{\"uname\":\"cxk\",\"pwd\":\"123456\"}";
+            let user = JSON.parse(str);
+            alert(typeof user);
+            alert(user.uname+"_"+user.pwd);*/
+
+
+        var user = {"uname": 'cxk', " pwd": '123456'};
+        alert(typeof user);
+        let userStr = JSON.stringify(user);
+        alert(typeof userStr);
+        alert(userStr);
+
+    }
+
+
+</script>
+
+
+<body>
+<input type="text" value="将json字符串转换为字符串(js写法)" onclick="hello01()">
+</body>
+</html>

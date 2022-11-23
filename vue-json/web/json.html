@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script language="JavaScript" src="script/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script language="Javascript">
+        window.onload = function () {
+            var app = new Vue({
+                el: "#app",  //#id
+                data: {
+                    username: "awe",
+                    password: "123"
+                },
+                methods: {
+                    GoToClient: function () {
+                        axios({
+                            method: 'post',
+                            url: '/vue_json/json.do',
+                            data: {
+                                uname: app.username,
+                                pwd: app.password
+                            }
+                        }).then(function (value) {
+                            console.log(value)
+                            console.log(value.data)
+                            console.log(value.data.uname);
+                            console.log(value.data.pwd);
+                            var  data=value.data;
+                            app.username=data.uname;
+                            app.password=data.pwd;
+
+                            //此处value中的data返回的是 js object，因此可以直接点出属性
+                            //如果我们获取的是一个字符串：  "{uname:\"鸠摩智\",pwd:\"ok\"}"
+
+                            //js语言中 也有字符串和js对象之间互转的API
+                            //string JSON.stringify(object)     object->string
+                            //object JSON.parse(string)         string->object
+
+
+                        }).catch(function (reason) {
+                            console.log(reason);
+                        });
+
+                    }
+                }
+            });
+        }
+    </script>
+
+
+</head>
+
+
+<body>
+<div id="app">
+    用户名:<input type="text" v-model="username">
+    密码:<input type="text" v-model="password">
+    <input type="button" value="点击发送一个异步请求到服务器" @click="GoToClient">
+</div>
+
+</body>
+</html>
